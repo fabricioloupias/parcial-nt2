@@ -1,18 +1,35 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <b-container>
+      <form-user />
+    </b-container>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import FormUser from "@/components/FormUser.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    FormUser
+  },
+  mounted() {
+    this.$store.dispatch("usersModule/fetchUsers");
+  },
+  computed: {
+    users() {
+      return this.$store.state.usersModule.users;
+    },
+    user() {
+      return this.$store.state.usersModule.user;
+    }
+  },
+  methods: {
+    userById() {
+      this.$store.dispatch("usersModule/getUserById", 1);
+    }
   }
 };
 </script>
