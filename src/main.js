@@ -16,8 +16,11 @@ Vue.use(BootstrapVue);
 //  BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
 
+//moment
+Vue.use(require("vue-moment"));
+
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");
