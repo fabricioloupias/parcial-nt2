@@ -1,21 +1,17 @@
 import { userService } from "../../services/users";
 
 const actions = {
-  async fetchUsers(context) {
+  async signIn(context, user) {
     try {
-      const response = await userService.fetchUsers();
-      context.commit("FETCH_USERS", response.data);
+      const isAuth = await userService.signIn(user);
+      context.commit("SET_IS_AUTH", isAuth);
     } catch (error) {
       // handle the error here
     }
   },
-  async getUserById(context, userId) {
-    try {
-      const response = await userService.getUserById(userId);
-      context.commit("FETCH_USER", response.data);
-    } catch (error) {
-      // handle the error here
-    }
+
+  async signOut(context) {
+    context.commit("SET_IS_AUTH", false);
   }
 };
 

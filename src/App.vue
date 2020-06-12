@@ -1,13 +1,32 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
+    </div>-->
     <router-view />
   </div>
 </template>
 
+<script>
+export default {
+  computed: {
+    isAuth() {
+      return this.$store.state.usersModule.isAuth;
+      // Or return basket.getters.fruitsCount
+      // (depends on your design decisions).
+    }
+  },
+  watch: {
+    isAuth(newCount) {
+      // Our fancy notification (2).
+      if (newCount) {
+        this.$router.push({ path: "home" });
+      }
+    }
+  }
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

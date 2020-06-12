@@ -1,6 +1,5 @@
 const state = {
-  users: [],
-  user: null
+  isAuth: false
 };
 
 export default state;

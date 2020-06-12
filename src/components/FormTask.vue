@@ -1,8 +1,8 @@
 <template>
-  <div class="form-user">
+  <div class="form-taks">
     <b-card title="Nueva tarea" style="max-width: 30rem;" class="mx-auto shadow text-left">
       <ValidationObserver v-slot="{ invalid }">
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-form @submit="onSubmit" @reset="onReset">
           <b-form-group id="input-group-1" label="Descripcion" label-for="input-1">
             <validation-provider
               rules="minmax:10,50|required"
@@ -33,7 +33,7 @@
             </validation-provider>
           </b-form-group>
           <b-form-group id="input-group-1" label="Nombre" label-for="input-1">
-            <validation-provider rules="positive|negative" :bails="false" v-slot="{ errors }">
+            <validation-provider rules="required" :bails="false" v-slot="{ errors }">
               <b-form-input
                 id="input-1"
                 v-model="task.name"
@@ -61,7 +61,7 @@ import "@/services/tasks/taskRules";
 import ErrorMessageInput from "./ErrorMessageInput.vue";
 
 export default {
-  name: "form-user",
+  name: "form-task",
   components: {
     ValidationProvider,
     ErrorMessageInput,
@@ -73,15 +73,7 @@ export default {
         email: "",
         name: "",
         description: ""
-      },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn"
-      ],
-      show: true
+      }
     };
   },
   methods: {
@@ -92,14 +84,10 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
+      this.task.email = "";
+      this.task.name = "";
+      this.task.description = null;
       // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
     }
   }
 };

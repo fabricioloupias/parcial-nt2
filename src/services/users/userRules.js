@@ -1,16 +1,14 @@
 import { extend } from "vee-validate";
 
-extend("positive", (value) => {
-  if (value >= 0) {
-    return true;
-  }
-
-  return "This field must be a positive number";
+extend("required", {
+  validate(value) {
+    return {
+      required: true,
+      valid: ["", null, undefined].indexOf(value) === -1
+    };
+  },
+  message: "El campo {_field_} es requerido",
+  // This rule reports the `required` state of the field.
+  computesRequired: true
 });
 
-extend("negative", (value) => {
-  if (value.length < 3) {
-    return "This field must be 3";
-  }
-  return false;
-});

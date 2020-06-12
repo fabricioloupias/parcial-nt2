@@ -1,10 +1,7 @@
 const mutations = {
-  FETCH_USERS: (state, payload) => {
-    state.users = payload;
+  SET_IS_AUTH: (state, payload) => {
+    state.isAuth = payload;
   },
-  FETCH_USER: (state, payload) => {
-    state.user = payload;
-  }
 };
 
 export default mutations;

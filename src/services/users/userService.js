@@ -1,15 +1,20 @@
-import { httpClient } from "../api";
+// import { httpClient } from "../api";
 
-const END_POINT = "/users";
+// const END_POINT = "/users";
 
 export const userService = {
-  fetchUsers() {
-    return httpClient.get(END_POINT);
+  signIn(userCredentials) {
+    const promise = new Promise((resolve, reject) => {
+      if (
+        userCredentials.username == "root" &&
+        userCredentials.password == 1234
+      ) {
+        resolve(true);
+      } else {
+        reject(false);
+      }
+    });
+
+    return promise;
   },
-  getUserById(userId) {
-    return httpClient.get(`${END_POINT}/${userId}`);
-  },
-  createUser(username, password) {
-    return httpClient.post(END_POINT, { username, password });
-  }
 };
